@@ -1,0 +1,7 @@
+
+在 Spring 中，构成应用程序主干并由Spring IoC容器管理的对象称为bean。bean是一个由Spring IoC容器实例化、组装和管理的对象。
+
+我们总结如下：
+1.bean是对象，一个或者多个不限定
+2.bean由Spring中一个叫IoC的东西管理
+3.我们的应用程序由一个个bean构成
