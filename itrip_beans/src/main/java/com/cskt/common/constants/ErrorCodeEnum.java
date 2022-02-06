@@ -8,7 +8,7 @@ package com.cskt.common.constants;
 public enum ErrorCodeEnum {
     /*前台*/
     OK("00000", "成功"),
-    AUTH_UNKNOWN("30000", "用户不存在"),
+    AUTH_UNKNOWN("30000", "用户不存在，请先注册"),
     AUTH_USER_ALREADY_EXISTS("30001", "用户已存在"),
     AUTH_AUTHENTICATION_FAILED("30002", "用户名或密码错误"),
     AUTH_PARAMETER_ERROR("30003", "用户名密码参数错误，为空"),
@@ -38,8 +38,9 @@ public enum ErrorCodeEnum {
     CACHE_SERVICE_ERROR("C0130", "缓存服务出错"),
     BIZ_DATA_NULL("10000","数据为空"),
     ;
-    private String errorCode;
-    private String msg;
+
+    private String errorCode;   //错误编码
+    private String msg;         //错误提示信息
     ErrorCodeEnum(String errorCode, String msg) {
         this.errorCode = errorCode;
         this.msg = msg;

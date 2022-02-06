@@ -26,9 +26,29 @@ public class UserController {
     @Resource
     private ItripUserService userService;
 
-    @GetMapping(value = "/ckusr")
+    @GetMapping(value = "/checkUser")
     @ApiOperation(value = "验证用户是否存在")
     public ReturnResult checkUser(@ApiParam(value = "被验证的用户名") String name) {
+        if (!StringUtils.hasLength(name)) {
+            //参数为空
+            return ReturnResult.error(ErrorCodeEnum.AUTH_PARAMETER_IS_EMPTY);
+        }
+        QueryWrapper<ItripUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_code", name);
+        ItripUser user = userService.getOne(queryWrapper);
+        if (user != null) {
+            //当用户数据不为空的时候，校验不通过
+            return ReturnResult.error(ErrorCodeEnum.AUTH_USER_ALREADY_EXISTS);
+        }
+        if (user == null) {
+            return ReturnResult.error(ErrorCodeEnum.AUTH_UNKNOWN);
+        }
+        return ReturnResult.ok();
+    }
+
+    @GetMapping(value = "/getUsersList")
+    @ApiOperation(value = "查询用户列表")
+    public ReturnResult getUsersList(@ApiParam(value = "被验证的用户名") String name) {
         if (!StringUtils.hasLength(name)) {
             //参数为空
             return ReturnResult.error(ErrorCodeEnum.AUTH_PARAMETER_IS_EMPTY);
